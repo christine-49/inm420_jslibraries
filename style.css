@@ -415,7 +415,7 @@ ul  { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition), border-color var(--transition);
+  transition: border-color var(--transition);
   box-shadow: none;
   text-shadow: none;
 }
