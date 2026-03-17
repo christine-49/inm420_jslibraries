@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voya — Wander Further</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Glide.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" />
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Site stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+      <!-- HEADER / NAV -->
+      <header class="site-header" id="siteHeader">
+        <nav class="nav container">
+          <a href="#" class="nav__logo">Voya</a>
+
+          <ul class="nav__links" id="navLinks">
+            <li>
+                <a href="#destinations" class="nav__link">Destinations</a>
+            </li>
+            <li>
+                <a href="#map" class="nav__link">Explore Map</a>
+            </li>
+            <li>
+                <a href="#experiences" class="nav__link">Experiences</a>
+            </li>
+            <li>
+              <a href="#newsletter" class="nav__link nav__link--cta" id="ctaBtn">Get Started</a>
+            </li>
+          </ul>
+
+          <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </nav>
+      </header>
+      
+      <!-- Hero - Three.js (Particle Canvas) -->
+      <section class="hero" id="hero" aria-label="Hero section">
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+        <div class="hero__content container">
+          <p class="hero__eyebrow">The world is waiting</p>
+          <h1 class="hero__headline">
+            Discover <em>places</em><br />that move you
+          </h1>
+          <p class="hero__sub">
+            Curated journeys to the world's most extraordinary corners —
+            crafted for the endlessly curious.
+          </p>
+          <div class="hero__actions">
+            <a href="#destinations" class="btn btn--primary">Browse Destinations</a>
+            <a href="#map" class="btn btn--ghost">Explore the Map</a>
+          </div>
+        </div>
+
+        <div class="hero__scroll-hint" aria-hidden="true">
+          <span>scroll</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- Destinations Slder - Glide.js --> 
+      <section class="destinations section" id="destinations">
+        <div class="container">
+          <header class="section-header">
+            <p class="section-eyebrow">Featured</p>
+            <h2 class="section-title">Top Destinations</h2>
+            <p class="section-sub">Hand-picked spots that define what travel should feel like.</p>
+          </header>
+
+          <div class="glide" id="destinationsGlide">
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+
+                <li class="glide__slide">
+                  <article class="card">
+                    <div class="card__img-wrap">
+                      <img src="kyoto.jpg" alt="Fushimi Inari shrine gate tunnels in Kyoto, Japan" class="card__img" loading="lazy" />
+                      <span class="card__badge">Asia</span>
+                    </div>
+                    <div class="card__body">
+                      <h3 class="card__title">Kyoto, Japan</h3>
+                      <p class="card__desc">Ancient temples, bamboo groves, and cherry blossom corridors frozen in time.</p>
+                      <div class="card__tags">
+                        <span class="card__tag">Cultural</span>
+                        <span class="card__tag">Spiritual</span>
+                      </div>
+                      <a href="#map" class="card__link">Explore →</a>
+                    </div>
+                  </article>
+                </li>
+
+                <li class="glide__slide">
+                  <article class="card">
+                    <div class="card__img-wrap">
+                      <img src="amalfi.jpg" alt="Colourful buildings along the Amalfi Coast, Italy" class="card__img" loading="lazy" />
+                      <span class="card__badge">Europe</span>
+                    </div>
+                    <div class="card__body">
+                      <h3 class="card__title">Amalfi Coast, Italy</h3>
+                      <p class="card__desc">Cliffside villages tumbling into turquoise seas, drenched in golden afternoon light.</p>
+                      <div class="card__tags">
+                        <span class="card__tag">Coastal</span>
+                        <span class="card__tag">Romantic</span>
+                      </div>
+                      <a href="#map" class="card__link">Explore →</a>
+                    </div>
+                  </article>
+                </li>
+
+                <li class="glide__slide">
+                  <article class="card">
+                    <div class="card__img-wrap">
+                      <img src="patagonia.jpg" alt="Torres del Paine granite towers in Patagonia, Argentina" class="card__img" loading="lazy" />
+                      <span class="card__badge">South America</span>
+                    </div>
+                    <div class="card__body">
+                      <h3 class="card__title">Patagonia, Argentina</h3>
+                      <p class="card__desc">Jagged granite towers, howling winds, and glaciers older than memory itself.</p>
+                      <div class="card__tags">
+                        <span class="card__tag">Adventure</span>
+                        <span class="card__tag">Wilderness</span>
+                      </div>
+                      <a href="#map" class="card__link">Explore →</a>
+                    </div>
+                  </article>
+                </li>
+
+                <li class="glide__slide">
+                  <article class="card">
+                    <div class="card__img-wrap">
+                      <img src="morocco.jpg" alt="Colourful spice market in Marrakech, Morocco" class="card__img" loading="lazy" />
+                      <span class="card__badge">Africa</span>
+                    </div>
+                    <div class="card__body">
+                      <h3 class="card__title">Marrakech, Morocco</h3>
+                      <p class="card__desc">Labyrinthine medinas, spice-scented souks, and riads hiding secret gardens.</p>
+                      <div class="card__tags">
+                        <span class="card__tag">Sensory</span>
+                        <span class="card__tag">Historical</span>
+                      </div>
+                      <a href="#map" class="card__link">Explore →</a>
+                    </div>
+                  </article>
+                </li>
+
+                <li class="glide__slide">
+                  <article class="card">
+                    <div class="card__img-wrap">
+                      <img src="iceland.jpg" alt="Northern lights above a snowy landscape in Iceland" class="card__img" loading="lazy" />
+                      <span class="card__badge">Europe</span>
+                    </div>
+                    <div class="card__body">
+                      <h3 class="card__title">Iceland</h3>
+                      <p class="card__desc">Lava fields, midnight sun, and aurora-lit skies over raw volcanic landscapes.</p>
+                      <div class="card__tags">
+                        <span class="card__tag">Nature</span>
+                        <span class="card__tag">Remote</span>
+                      </div>
+                      <a href="#map" class="card__link">Explore →</a>
+                    </div>
+                  </article>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<" aria-label="Previous slide">&#8592;</button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">" aria-label="Next slide">&#8594;</button>
+            </div>
+
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+              <button class="glide__bullet" data-glide-dir="=0" aria-label="Slide 1"></button>
+              <button class="glide__bullet" data-glide-dir="=1" aria-label="Slide 2"></button>
+              <button class="glide__bullet" data-glide-dir="=2" aria-label="Slide 3"></button>
+              <button class="glide__bullet" data-glide-dir="=3" aria-label="Slide 4"></button>
+              <button class="glide__bullet" data-glide-dir="=4" aria-label="Slide 5"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Band -->
+      <section class="stats-band" aria-label="Key statistics">
+        <div class="container stats-band__grid">
+          <div class="stat">
+            <span class="stat__num">120+</span>
+            <span class="stat__label">Countries covered</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">34K</span>
+            <span class="stat__label">Happy travellers</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">850+</span>
+            <span class="stat__label">Curated itineraries</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">4.9&#9733;</span>
+            <span class="stat__label">Average rating</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Map - Leaflet. js-->
+      <section class="map-section section" id="map">
+        <div class="container">
+          <header class="section-header">
+            <p class="section-eyebrow">Explore</p>
+            <h2 class="section-title">Find your next destination</h2>
+            <p class="section-sub">Click any pin to discover what awaits.</p>
+          </header>
+        </div>
+        <div id="leafletMap" role="application" aria-label="Interactive world map showing destinations"></div>
+      </section>
+
+      <!-- Experiences - Popper.js Tooltips -->
+      <section class="experiences section" id="experiences">
+        <div class="container">
+          <header class="section-header">
+            <p class="section-eyebrow">Beyond sightseeing</p>
+            <h2 class="section-title">Signature Experiences</h2>
+            <p class="section-sub">Hover each card to unlock the story.</p>
+          </header>
+
+          <div class="experiences__grid">
+
+            <div class="exp-card" id="exp1" tabindex="0" aria-describedby="tt1">
+              <div class="exp-card__icon" aria-hidden="true">🎈</div>
+              <h3 class="exp-card__title">Hot Air Balloon</h3>
+              <p class="exp-card__place">Cappadocia, Turkey</p>
+            </div>
+            <div class="popper-tip" id="tt1" role="tooltip">
+              Float silently above ancient fairy chimneys as the sunrise paints the valley gold.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+            <div class="exp-card" id="exp2" tabindex="0" aria-describedby="tt2">
+              <div class="exp-card__icon" aria-hidden="true">🤿</div>
+              <h3 class="exp-card__title">Reef Diving</h3>
+              <p class="exp-card__place">Great Barrier Reef, Australia</p>
+            </div>
+            <div class="popper-tip" id="tt2" role="tooltip">
+              Plunge into coral labyrinths teeming with rainbow marine life in the world's largest reef system.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+            <div class="exp-card" id="exp3" tabindex="0" aria-describedby="tt3">
+              <div class="exp-card__icon" aria-hidden="true">🦍</div>
+              <h3 class="exp-card__title">Gorilla Trekking</h3>
+              <p class="exp-card__place">Bwindi, Uganda</p>
+            </div>
+            <div class="popper-tip" id="tt3" role="tooltip">
+              Trek mist-covered mountain slopes to meet endangered mountain gorillas face to face.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+            <div class="exp-card" id="exp4" tabindex="0" aria-describedby="tt4">
+              <div class="exp-card__icon" aria-hidden="true">🐺</div>
+              <h3 class="exp-card__title">Husky Safari</h3>
+              <p class="exp-card__place">Lapland, Finland</p>
+            </div>
+            <div class="popper-tip" id="tt4" role="tooltip">
+              Chase the aurora borealis across frozen tundra on a husky-pulled sled under star-filled Arctic skies.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+            <div class="exp-card" id="exp5" tabindex="0" aria-describedby="tt5">
+              <div class="exp-card__icon" aria-hidden="true">🥾</div>
+              <h3 class="exp-card__title">Camino Walk</h3>
+              <p class="exp-card__place">Santiago de Compostela, Spain</p>
+            </div>
+            <div class="popper-tip" id="tt5" role="tooltip">
+              Walk the ancient pilgrim path through medieval stone villages and golden wheat fields.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+            <div class="exp-card" id="exp6" tabindex="0" aria-describedby="tt6">
+              <div class="exp-card__icon" aria-hidden="true">🚣</div>
+              <h3 class="exp-card__title">Fjord Kayaking</h3>
+              <p class="exp-card__place">Sognefjord, Norway</p>
+            </div>
+            <div class="popper-tip" id="tt6" role="tooltip">
+              Paddle sea kayaks through mirror-still waters flanked by sheer fjord walls carved by ancient glaciers.
+              <div class="popper-arrow" data-popper-arrow></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter -->
+      <section class="newsletter section" id="newsletter" aria-label="Newsletter signup">
+        <div class="container newsletter__inner">
+          <div class="newsletter__text">
+            <p class="section-eyebrow">Stay inspired</p>
+            <h2 class="section-title">Never stop exploring</h2>
+            <p class="section-sub">Monthly destination guides, insider tips, and exclusive offers — delivered to your inbox.</p>
+          </div>
+          <form class="newsletter__form" id="newsletterForm" novalidate>
+            <div class="form-row">
+              <input type="text"  id="nameInput"  placeholder="Your name"  class="form-input" required autocomplete="name" />
+              <input type="email" id="emailInput" placeholder="Your email" class="form-input" required autocomplete="email" />
+              <button type="submit" class="btn btn--primary">Subscribe</button>
+            </div>
+            <p class="form-message" id="formMessage" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="container footer__grid">
+          <div class="footer__brand">
+            <a href="#" class="nav__logo footer__logo">Voya</a>
+            <p>Crafting extraordinary journeys<br />since 2018.</p>
+          </div>
+
+          <nav class="footer__nav" aria-label="Explore navigation">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="#destinations">Destinations</a></li>
+              <li><a href="#map">Interactive Map</a></li>
+              <li><a href="#experiences">Experiences</a></li>
+            </ul>
+          </nav>
+
+          <nav class="footer__nav" aria-label="Company navigation">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Voya</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="footer__social">
+            <h4>Follow us</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram" class="social-link">Ig</a>
+              <a href="#" aria-label="Twitter / X" class="social-link">X</a>
+              <a href="#" aria-label="Pinterest" class="social-link">Pt</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom container">
+          <p>&copy; 2026 Voya Travel. All rights reserved.</p>
+        </div>
+      </footer>
+
+      <!-- JS Libraries-->
+      <!-- 1. Three.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+      <!-- 2. Glide.js -->
+      <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+      <!-- 3. Leaflet -->
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <!-- 4. Popper.js -->
+      <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+      <!-- Site script -->
+      <script src="main.js"></script>
+  </body>
+</html>
