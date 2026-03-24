@@ -1,10 +1,20 @@
-// 1. Three.js  r128  —  animated particle constellation hero
-// 2. Glide.js        —  destination card carousel
-// 3. Leaflet   1.9.4 —  interactive world map
-// 4. Popper.js 2     —  experience card tooltips
+// ============================================================
+//  VOYA TRAVEL  —  main.js
+//  Libraries imported as ES modules (CDN API format):
+//    1. Three.js  r128  —  animated particle hero
+//    2. Glide.js        —  destination card carousel
+//    3. Leaflet   1.9.4 —  interactive world map
+//    4. Popper.js 2     —  experience card tooltips
+// ============================================================
 
-'use strict';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js';
+import Glide     from 'https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.esm.js';
+import * as L    from 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet-src.esm.js';
+import { createPopper } from 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/index.js';
 
+// ============================================================
+//  BOOT — each init is isolated; one failure won't block others
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
   [
     initNav,
@@ -22,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// NAV - scroll & mobile hamburger
+// ============================================================
+//  1. NAV — scroll class + mobile hamburger
+// ============================================================
 function initNav() {
   const header    = document.getElementById('siteHeader');
   const hamburger = document.getElementById('hamburger');
@@ -51,12 +63,13 @@ function initNav() {
   }
 }
 
-// Three.js - light-theme hero
+// ============================================================
+//  2. THREE.JS — light-theme particle hero
+// ============================================================
 function initThreeHero() {
   const canvas = document.getElementById('heroCanvas');
-  const threeLoaded = typeof THREE === 'function' || typeof THREE === 'object';
 
-  if (canvas && threeLoaded) {
+  if (canvas) {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     const initW = (canvas.parentElement && canvas.parentElement.offsetWidth)
@@ -155,12 +168,13 @@ function initThreeHero() {
   }
 }
 
-// Glide.js - destination carousel
+// ============================================================
+//  3. GLIDE.JS — destination carousel
+// ============================================================
 function initGlide() {
-  const glideLoaded = typeof Glide === 'function';
-  const glideEl     = document.getElementById('destinationsGlide');
+  const glideEl = document.getElementById('destinationsGlide');
 
-  if (glideLoaded && glideEl) {
+  if (glideEl) {
     new Glide('#destinationsGlide', {
       type:              'carousel',
       perView:           3,
@@ -176,12 +190,13 @@ function initGlide() {
   }
 }
 
-// Leaflet.js - interactive destination map
+// ============================================================
+//  4. LEAFLET.JS — interactive destination map
+// ============================================================
 function initLeafletMap() {
-  const leafletLoaded = typeof L === 'object';
-  const mapEl         = document.getElementById('leafletMap');
+  const mapEl = document.getElementById('leafletMap');
 
-  if (leafletLoaded && mapEl) {
+  if (mapEl) {
     const destinations = [
       { lat: 35.0116,  lng: 135.7681, name: 'Kyoto, Japan',           desc: 'Ancient temples, bamboo groves & cherry blossoms.',          region: 'Asia' },
       { lat: 40.6341,  lng: 14.6025,  name: 'Amalfi Coast, Italy',    desc: 'Cliffside villages tumbling into turquoise seas.',            region: 'Europe' },
@@ -231,45 +246,45 @@ function initLeafletMap() {
   }
 }
 
-// Popper.js - expereince card tooltips
+// ============================================================
+//  5. POPPER.JS — experience card tooltips
+// ============================================================
 function initPopperTooltips() {
-  const popperLoaded = typeof Popper === 'object';
+  const pairs = [
+    { card: 'exp1', tip: 'tt1' },
+    { card: 'exp2', tip: 'tt2' },
+    { card: 'exp3', tip: 'tt3' },
+    { card: 'exp4', tip: 'tt4' },
+    { card: 'exp5', tip: 'tt5' },
+    { card: 'exp6', tip: 'tt6' },
+  ];
 
-  if (popperLoaded) {
-    const pairs = [
-      { card: 'exp1', tip: 'tt1' },
-      { card: 'exp2', tip: 'tt2' },
-      { card: 'exp3', tip: 'tt3' },
-      { card: 'exp4', tip: 'tt4' },
-      { card: 'exp5', tip: 'tt5' },
-      { card: 'exp6', tip: 'tt6' },
-    ];
+  pairs.forEach(({ card, tip }) => {
+    const cardEl = document.getElementById(card);
+    const tipEl  = document.getElementById(tip);
 
-    pairs.forEach(({ card, tip }) => {
-      const cardEl = document.getElementById(card);
-      const tipEl  = document.getElementById(tip);
+    if (cardEl && tipEl) {
+      const popperInstance = createPopper(cardEl, tipEl, {
+        placement: 'top',
+        modifiers: [
+          { name: 'offset',          options: { offset: [0, 10] } },
+          { name: 'preventOverflow', options: { padding: 8 } },
+          { name: 'flip',            options: { fallbackPlacements: ['bottom', 'right', 'left'] } },
+          { name: 'arrow',           options: { element: '[data-popper-arrow]' } },
+        ],
+      });
 
-      if (cardEl && tipEl) {
-        const popperInstance = Popper.createPopper(cardEl, tipEl, {
-          placement: 'top',
-          modifiers: [
-            { name: 'offset',          options: { offset: [0, 10] } },
-            { name: 'preventOverflow', options: { padding: 8 } },
-            { name: 'flip',            options: { fallbackPlacements: ['bottom', 'right', 'left'] } },
-            { name: 'arrow',           options: { element: '[data-popper-arrow]' } },
-          ],
-        });
-
-        const show = () => { tipEl.setAttribute('data-show', ''); popperInstance.update(); };
-        const hide = () => { tipEl.removeAttribute('data-show'); };
-        ['mouseenter', 'focus' ].forEach(ev => cardEl.addEventListener(ev, show));
-        ['mouseleave', 'blur'  ].forEach(ev => cardEl.addEventListener(ev, hide));
-      }
-    });
-  }
+      const show = () => { tipEl.setAttribute('data-show', ''); popperInstance.update(); };
+      const hide = () => { tipEl.removeAttribute('data-show'); };
+      ['mouseenter', 'focus' ].forEach(ev => cardEl.addEventListener(ev, show));
+      ['mouseleave', 'blur'  ].forEach(ev => cardEl.addEventListener(ev, hide));
+    }
+  });
 }
 
-// Newsletter Form
+// ============================================================
+//  6. NEWSLETTER FORM — validation & feedback
+// ============================================================
 function initNewsletterForm() {
   const form    = document.getElementById('newsletterForm');
   const nameIn  = document.getElementById('nameInput');
